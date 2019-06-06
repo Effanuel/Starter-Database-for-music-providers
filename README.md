@@ -1,10 +1,15 @@
 # Starter-Database-for-music-providers (3NF)
 A small database with an **artist, album, song, playlists, tags, users** tables for a university project.
 
+Contributors of the project:
+* Juozas Rimantas, Gediminas Valys
+
+---
+
 ![database](https://github.com/Effanuel/Starter-Database-for-music-providers/blob/master/generated_database_scheme.png)
 
-
-
+## Installation:
+* Just import **.sql** file into your database IDE.
 
 ## Database features included:
 1. Automatic deletion of foreign tables' rows using triggers
@@ -36,6 +41,7 @@ END
 ```
 
 2. Automatic insertion into foreign tables *(using cascade, can also be done using triggers, although unnecessary)*
+---
 ### Due to triggers we created earlier, row deletion from the main tables is very simple:
 
 ```sql
@@ -49,11 +55,14 @@ DELETE FROM songs  # deletes a song of the album of the artist
 WHERE song = 'TEST_SONG_INSERT';
 
 ```
-
+---
 ## THINGS TO IMPROVE:
-* Renaming table names to singular to comply with norms
+* Renaming table names to singular to comply with norms;
+* Adding more columns;
+* Adding dummy data;
 
-
+### Disclaimer:
+* Given the limited functionality, this database could be also considered to be **5NF**.
 
 
 
