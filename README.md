@@ -40,7 +40,31 @@ BEGIN
 END
 ```
 
-2. Automatic insertion into foreign tables *(using cascade, can also be done using triggers, although unnecessary)*
+2. Automatic insertion into foreign tables using block of codes:
+
+```sql
+BEGIN; # inserting just an artist
+  INSERT INTO artists(artist)
+  VALUES ('TEST_ARTIST_INSERT');
+COMMIT;
+
+
+BEGIN; # inserting an album of some specific artist
+  INSERT INTO albums(album)
+  VALUES ('TEST_ALBUM_INSERT');
+  INSERT INTO album_artist(albumID, artistID)
+  VALUES (LAST_INSERT_ID(), (SELECT artistID FROM artists WHERE artist = 'TEST_ARTIST_INSERT'));
+COMMIT;
+
+
+BEGIN; # inserting a song of some specific album
+  INSERT INTO songs(song)
+  VALUES ('TEST_SONG_INSERT');
+  INSERT INTO song_album(songID, albumID)
+  VALUES (LAST_INSERT_ID(), (SELECT albumID FROM albums WHERE album = 'TEST_ALBUM_INSERT'));
+COMMIT;
+
+```
 ---
 ### Due to triggers we created earlier, row deletion from the main tables is very simple:
 
@@ -58,6 +82,7 @@ WHERE song = 'TEST_SONG_INSERT';
 ---
 ## THINGS TO IMPROVE:
 * Renaming table names to singular to comply with norms;
+* Make multi-row insertion easier;
 * Adding more columns;
 * Adding dummy data;
 
